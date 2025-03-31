@@ -55,12 +55,12 @@ def count_logs_by_level(logs : list) -> dict:
         level_dict[i["level"]] += 1
     return level_dict
 
-def display_logs_counts(counts: dict):
+def display_log_counts(counts: dict):
     print("Logs level | Quantity\n-----------|---------")
     for key, value in counts.items():
         print(f"{key:<10} | {value:^10}")
 
-if __name__ == "__main__":                                           # In this block used GPT for help, because i couldn't connect all my functions 
+if __name__ == "__main__":
     path = sys.argv[1]
     level = sys.argv[2].lower() if len(sys.argv) > 2 else None
 
@@ -68,12 +68,12 @@ if __name__ == "__main__":                                           # In this b
     count_logs = count_logs_by_level(logs)
 
     if level:
-        display_logs_counts(count_logs)
+        display_log_counts(count_logs)
         print(f"Details for '{level.upper()}' level:")
         for item in filter_logs_by_level(logs, level):
             print(f"{item["date"]} {item["time"]} - {item["message"]}")
     else:
-        display_logs_counts(count_logs)
+        display_log_counts(count_logs)
 
 
 
