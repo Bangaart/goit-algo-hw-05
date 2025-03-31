@@ -16,20 +16,15 @@
 from decimal import Decimal
 
 def generator_numbers(text):
-    for i in open(text, encoding='utf-8'):
-         for item in i.split():
-            if item.replace(".", "").isdecimal():
-                yield Decimal(item)
-    # for item in text.split():     # this solution for case where text is not file but string
-    #     if item.replace(".", "").isdecimal():
-    #         yield Decimal(item)
+    for item in text.split():
+        if item.replace(".", "").isdecimal():
+            yield Decimal(item)
 
 def sum_profit(text, generator_numbers):
     return sum([i for i in generator_numbers(text)])
 
-# text = "Загальний дохід працівника складається з декількох частин: 1000.01 як основний дохід, доповнений додатковими надходженнями
-# 27.45 і 324.00 доларів."
-total_income = sum_profit("Text.txt", generator_numbers)
+text = "Загальний дохід працівника складається з декількох частин: 1000.01 як основний дохід, доповнений додатковими надходженнями 27.45 і 324.00 доларів."
+total_income = sum_profit(text, generator_numbers)
 print(f"Total revenue = {total_income}")
 
 
