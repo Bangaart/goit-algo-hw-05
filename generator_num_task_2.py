@@ -14,16 +14,16 @@
 # Переконайтеся, що sum_profit коректно обробляє дані від generator_numbers і підсумовує всі числа.
 
 from decimal import Decimal
-
+import re
 def generator_numbers(text):
-    for item in text.split():
-        if item.replace(".", "").isdecimal():
-            yield Decimal(item)
+    pattern = re.compile(r"\s\d+.\d+\s")
+    for item in pattern.findall(text):
+        yield Decimal(item.strip())
 
 def sum_profit(text, generator_numbers):
     return sum([i for i in generator_numbers(text)])
 
-text = "Загальний дохід працівника складається з декількох частин: 1000.01 як основний дохід, доповнений додатковими надходженнями 27.45 і 324.00 доларів."
+text = "20.23 Загальний дохід працівника складається з декількох частин: 1000.01 як основний дохід, доповнений додатковими надходженнями 27.45 і 324.00 доларів.34.21"
 total_income = sum_profit(text, generator_numbers)
 print(f"Total revenue = {total_income}")
 
